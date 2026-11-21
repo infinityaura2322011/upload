@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coding Monster — Autonomous Software Engineering</title>
+<meta name="description" content="Coding Monster: autonomous AI coding agent with multi-provider routing, capability-aware model selection, and real engineering review.">
+<link rel="stylesheet" href="app.css">
+<script src="perchance-brain.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="titlebar">
+  <div id="titlebar-brand">
+    <div class="monster-icon idle" id="titleMonster"></div>
+    <span>CODING MONSTER</span>
+    <span id="titleProject" class="title-project"></span>
+  </div>
+  <div id="titlebar-controls">
+    <button id="btn-minimize" title="Minimize" aria-label="Minimize">&#8722;</button>
+    <button id="btn-maximize" title="Maximize / Restore" aria-label="Maximize / Restore">&#9633;</button>
+    <button class="close" id="btn-close" title="Close" aria-label="Close">&#10005;</button>
+  </div>
+</div>
+
+<div id="app">
+  <!-- LEFT SIDEBAR -->
+  <aside id="sidebar-left">
+    <nav id="nav">
+      <button class="nav-btn active" data-view="home" title="Command Center">
+        <span class="nav-icon">⌂</span><span class="nav-label">Command Center</span>
+      </button>
+      <button class="nav-btn" data-view="assets" title="Asset Discovery">
+        <span class="nav-icon">🖼</span><span class="nav-label">Assets</span>
+      </button>
+      <button class="nav-btn" data-view="memory" title="Project Memory">
+        <span class="nav-icon">🧠</span><span class="nav-label">Memory</span>
+      </button>
+      <button class="nav-btn" data-view="files" title="Files">
+        <span class="nav-icon">▤</span><span class="nav-label">Files</span>
+      </button>
+      <button class="nav-btn" data-view="sessions" title="Sessions">
+        <span class="nav-icon">◷</span><span class="nav-label">Sessions</span>
+      </button>
+      <button class="nav-btn" data-view="positions" title="Set Position">
+        <span class="nav-icon">⊞</span><span class="nav-label">Set Position</span>
+      </button>
+      <button class="nav-btn" data-view="models" title="Models">
+        <span class="nav-icon">◈</span><span class="nav-label">Models</span>
+      </button>
+      <button class="nav-btn" data-view="git" title="Git">
+        <span class="nav-icon">⑂</span><span class="nav-label">Git</span>
+      </button>
+      <button class="nav-btn" data-view="usage" title="Usage">
+        <span class="nav-icon">◉</span><span class="nav-label">Usage</span>
+      </button>
+      <button class="nav-btn" data-view="settings" title="Settings">
+        <span class="nav-icon">⚙</span><span class="nav-label">Settings</span>
+      </button>
+    </nav>
+    <div id="workspace-panel">
+      <div class="panel-label">WORKSPACE</div>
+      <div id="workspace-name" class="ws-name">—</div>
+      <div class="workspace-actions">
+        <button id="btn-open-file" class="btn-ghost small">Open File</button>
+        <button id="btn-add-file" class="btn-ghost small">Add File</button>
+        <button id="btn-add-folder" class="btn-ghost small">Add Folder</button>
+        <button id="btn-open-folder" class="btn-ghost small">Open Project</button>
+        <button id="btn-open-explorer" class="btn-ghost small" title="Open workspace folder in file explorer">📂 Explorer</button>
+      </div>
+      <!-- Hidden file inputs for browser (non-Electron) fallback -->
+      <input type="file" id="input-open-file" style="display:none" accept="*/*">
+      <input type="file" id="input-add-files" style="display:none" multiple accept="*/*">
+      <input type="file" id="input-add-folder" style="display:none" webkitdirectory multiple>
+      <input type="file" id="input-open-folder" style="display:none" webkitdirectory multiple>
+      <div id="project-profile" class="workspace-profile"></div>
+      <div id="file-tree" class="file-tree"></div>
+    </div>
+  </aside>
+
+  <!-- CENTER -->
+  <main id="center">
+    <div id="view-home" class="view active">
+      <div class="view-header">
+        <div class="eyebrow">Autonomous software engineering</div>
+        <h1>What are we building today?</h1>
+        <p class="subtitle">Describe the outcome. The Monster will inspect, plan, implement, review, test, and report every change.</p>
+      </div>
+      <div id="task-box" class="composer-container">
+        <div class="composer-main">
+          <textarea id="prompt" placeholder="e.g. Make the offline Snake game playable on the web using HTML, CSS, and vanilla JavaScript with score persistence..."></textarea>
+          <div class="composer-chips-row">
+            <button type="button" class="composer-chip active" id="chip-workspace" title="Active workspace context">
+              <span class="chip-icon">@</span><span id="chip-workspace-name">workspace</span>
+            </button>
+            <button type="button" class="composer-chip" id="chip-add-files" title="Attach files from project">
+              <span class="chip-icon">+</span> Add files
+            </button>
+            <button type="button" class="composer-chip" id="chip-context" title="Attach project architecture profile">
+              <span class="chip-icon">/</span> Context
+            </button>
+          </div>
+          <div id="task-attachments" class="task-attachments" aria-live="polite"></div>
+        </div>
+        <div class="composer-footer">
+          <div class="composer-footer-left">
+            <select id="composer-pipeline" class="composer-select" title="Engineering Pipeline">
+              <option value="full-autonomous">Full Engineering</option>
+              <option value="quick-fix">Quick Fix &amp; Test</option>
+              <option value="architecture">Architecture Review</option>
+            </select>
+            <div class="mode-toggle">
+              <button class="mode-btn active" id="btn-auto" title="Auto-best model selection">AUTO-BEST</button>
+              <button class="mode-btn" id="btn-manual" title="Manual model locks">MANUAL</button>
+            </div>
+          </div>
+          <div class="composer-footer-right">
+            <span class="hint">ENTER to run &nbsp;·&nbsp; SHIFT+ENTER for new line</span>
+            <label class="adult-mode-toggle" title="Generate an adult-rated interpretation of the request">
+              <input type="checkbox" id="chat-adult-mode">
+              <span>18+</span>
+            </label>
+            <button id="btn-start" class="btn-primary run-btn">▶ Run Task</button>
+            <button id="btn-stop" class="btn-danger run-btn" style="display:none">■ Stop</button>
+          </div>
+        </div>
+      </div>
+      <div id="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">PROJECT</div>
+          <div class="stat-value" id="stat-project">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">GIT BRANCH</div>
+          <div class="stat-value dim" id="stat-branch">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PROVIDERS</div>
+          <div class="stat-value good" id="stat-providers">Checking...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">TASK STATE</div>
+          <div class="stat-value" id="stat-state">IDLE</div>
+        </div>
+      </div>
+      <div id="activity-section">
+        <div class="section-header">
+          <span>Activity log</span>
+          <button class="btn-link" id="btn-clear-log">Clear</button>
+        </div>
+        <div id="event-log"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
