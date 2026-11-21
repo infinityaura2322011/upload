@@ -1,0 +1,43 @@
+{
+	"name": "coding-monster",
+	"version": "0.2.0",
+	"private": true,
+	"description": "Coding Monster — autonomous AI engineering command center",
+	"main": "electron/main.js",
+	"scripts": {
+		"dev": "node scripts/dev.js",
+		"build:backend": "tsc --project tsconfig.json",
+		"build:electron": "tsc --project tsconfig.electron.json",
+		"build": "npm run build:backend && npm run build:electron",
+		"start": "electron .",
+		"typecheck": "tsc --noEmit",
+		"test": "node scripts/run_tests.js",
+		"game:test": "node game/game.test.js",
+		"game:art": "node scripts/game_art.js",
+		"game:art:test": "node scripts/game_art.test.js",
+		"game:serve": "node scripts/serve_game.js",
+		"sessions:clear": "node scripts/clear_sessions.js",
+		"package": "npm run build && electron-builder --win --x64"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"sql.js": "^1.14.2",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.14.0",
+		"electron": "^31.0.0",
+		"electron-builder": "^24.13.3",
+		"typescript": "^5.5.2"
+	},
+	"build": {
+		"appId": "com.codingmonster.app",
+		"productName": "Coding Monster",
+		"directories": { "output": "release" },
+		"files": ["electron/**/*", "dist/**/*", "public/**/*", "game/**/*", ".env", "node_modules/**/*"],
+		"win": { "target": "nsis" },
+		"nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+	}
+}
