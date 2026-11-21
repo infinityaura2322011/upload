@@ -1,95 +1,59 @@
 "use strict";
-// Coding Monster — Unified provider type definitions
-// ModelCapabilities is now capability-complete (12 dimensions).
+// ProviderQuota schema — provider-neutral quota tracking
+// source and confidence distinguish REAL from ESTIMATED from UNAVAILABLE data.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ROLE_REQUIRED_CAPS = exports.ROLE_DISPLAY = exports.DEFAULT_PROJECT_SETTINGS = exports.ProviderError = void 0;
-class ProviderError extends Error {
-    kind;
-    providerId;
-    retryable;
-    modelId;
-    constructor(kind, message, providerId, retryable, modelId) {
-        super(message);
-        this.kind = kind;
-        this.providerId = providerId;
-        this.retryable = retryable;
-        this.modelId = modelId;
-        this.name = "ProviderError";
-    }
+exports.formatCountdown = formatCountdown;
+exports.quotaFromGroqHeaders = quotaFromGroqHeaders;
+/** Utility: format a countdown string from reset epoch */
+function formatCountdown(resetAtMs) {
+    const diff = resetAtMs - Date.now();
+    if (diff <= 0)
+        return "00:00";
+    const totalSec = Math.ceil(diff / 1000);
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (h > 0)
+        return `${h}h ${String(m).padStart(2, "0")}m`;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
-exports.ProviderError = ProviderError;
-exports.DEFAULT_PROJECT_SETTINGS = {
-    contentRating: "EVERYONE",
-    minContentRating: "EVERYONE",
-    ageGateEnabled: false,
-    strictLicenseMode: false,
-    allowMatureAssets: false,
-    assetSearchEnabled: true,
-    automaticDownloads: false,
-};
-/** Human-readable display names for each role */
-exports.ROLE_DISPLAY = {
-    planner: "Planner",
-    designer: "Designer",
-    uiDesigner: "UI Designer",
-    systemArchitect: "System Architect",
-    architect: "Software Architect",
-    frontendCoder: "Frontend Coder",
-    backendCoder: "Backend Coder",
-    altCoder: "Alt Coder",
-    dbEngineer: "Database Engineer",
-    algorithmEngineer: "Algorithm Engineer",
-    securityEngineer: "Security Engineer",
-    engineeringReviewer: "Engineering Reviewer",
-    codeReviewer: "Code Reviewer",
-    refactorer: "Refactorer",
-    debugger: "Debugger",
-    tester: "Tester",
-    performanceEngineer: "Performance Engineer",
-    docEngineer: "Documentation Engineer",
-    finalJudge: "Final Judge",
-    releaseEngineer: "Release Engineer",
-    assetEngineer: "Asset Engineer",
-    unityCoder: "Unity Coder",
-    unrealCoder: "Unreal Coder",
-    gameplayCoder: "Gameplay Coder",
-    uiEngineer: "UI Engineer",
-    animationEngineer: "Animation Engineer",
-    audioEngineer: "Audio Engineer",
-    securityReviewer: "Security Reviewer",
-    licenseReviewer: "License Reviewer",
-    gameDesigner: "Game Designer",
-};
-/** Required capabilities per role */
-exports.ROLE_REQUIRED_CAPS = {
-    planner: ["chat", "textGeneration"],
-    designer: ["chat", "textGeneration"],
-    uiDesigner: ["chat", "textGeneration"],
-    systemArchitect: ["chat", "textGeneration"],
-    architect: ["chat", "textGeneration"],
-    frontendCoder: ["chat", "textGeneration"],
-    backendCoder: ["chat", "textGeneration"],
-    altCoder: ["chat", "textGeneration"],
-    dbEngineer: ["chat", "textGeneration"],
-    algorithmEngineer: ["chat", "textGeneration"],
-    securityEngineer: ["chat", "textGeneration"],
-    engineeringReviewer: ["chat", "textGeneration"],
-    codeReviewer: ["chat", "textGeneration"],
-    refactorer: ["chat", "textGeneration"],
-    debugger: ["chat", "textGeneration"],
-    tester: ["chat", "textGeneration"],
-    performanceEngineer: ["chat", "textGeneration"],
-    docEngineer: ["chat", "textGeneration"],
-    finalJudge: ["chat", "textGeneration"],
-    releaseEngineer: ["chat", "textGeneration"],
-    assetEngineer: ["chat", "textGeneration"],
-    unityCoder: ["chat", "textGeneration"],
-    unrealCoder: ["chat", "textGeneration"],
-    gameplayCoder: ["chat", "textGeneration"],
-    uiEngineer: ["chat", "textGeneration"],
-    animationEngineer: ["chat", "textGeneration"],
-    audioEngineer: ["chat", "textGeneration"],
-    securityReviewer: ["chat", "textGeneration"],
-    licenseReviewer: ["chat", "textGeneration"],
-    gameDesigner: ["chat", "textGeneration"],
-};
+/** Build a ProviderQuota from Groq rate-limit headers */
+function quotaFromGroqHeaders(providerId, modelId, headers) {
+    const now = Date.now();
+    const result = [];
+    if (headers.limitRequests !== undefined || headers.remainingRequests !== undefined) {
+        result.push({
+            providerId, modelId,
+            metric: "requests_per_minute",
+            unit: "requests",
+            period: "minute",
+            limit: headers.limitRequests,
+            remaining: headers.remainingRequests,
+            used: headers.limitRequests !== undefined && headers.remainingRequests !== undefined
+                ? headers.limitRequests - headers.remainingRequests
+                : undefined,
+            resetAt: headers.resetRequestsAt,
+            source: "provider_header",
+            confidence: "exact",
+            fetchedAt: now,
+        });
+    }
+    if (headers.limitTokens !== undefined || headers.remainingTokens !== undefined) {
+        result.push({
+            providerId, modelId,
+            metric: "tokens_per_minute",
+            unit: "tokens",
+            period: "minute",
+            limit: headers.limitTokens,
+            remaining: headers.remainingTokens,
+            used: headers.limitTokens !== undefined && headers.remainingTokens !== undefined
+                ? headers.limitTokens - headers.remainingTokens
+                : undefined,
+            resetAt: headers.resetTokensAt,
+            source: "provider_header",
+            confidence: "exact",
+            fetchedAt: now,
+        });
+    }
+    return result;
+}
