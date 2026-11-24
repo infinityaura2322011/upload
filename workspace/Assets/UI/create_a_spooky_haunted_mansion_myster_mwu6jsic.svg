@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3e8ff"/>
+      <stop offset="45%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#3b136e"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="232" height="232" rx="36" fill="#0d071b" stroke="#c084fc" stroke-width="4"/>
+  <polygon points="128,42 194,108 128,214 62,108" fill="url(#gem)" stroke="#f3e8ff" stroke-width="3"/>
+  <polygon points="128,42 162,108 128,214 94,108" fill="#ffffff" fill-opacity="0.22"/>
+  <text x="128" y="236" text-anchor="middle" fill="#f3e8ff" font-family="sans-serif" font-size="13">create a spooky haunted mansion </text>
+</svg>

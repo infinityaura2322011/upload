@@ -1,0 +1,150 @@
+{
+  "engine": "coding-monster-renpy",
+  "generatedAt": 1795493650771,
+  "title": "Create Spooky Haunted Mansion Mystery Story",
+  "prompt": "create a spooky haunted mansion mystery story game with thunder door sfx",
+  "genre": "horror",
+  "adultMode": false,
+  "media": {
+    "backgrounds": [
+      {
+        "key": "bg scene_one",
+        "slug": "bg_opening",
+        "title": "wide visual novel background, create a spooky haunted mansion mystery story game with thunder door sfx, atmospheric establishing shot, rich lighting, no text, no watermark (Concept Art · Background Generator)",
+        "prompt": "wide visual novel background, create a spooky haunted mansion mystery story game with thunder door sfx, atmospheric establishing shot, rich lighting, no text, no watermark",
+        "renpyPath": "images/bg_opening.webp",
+        "relativePath": "game/images/bg_opening.webp",
+        "targetPath": "/app/applet/workspace/game/images/bg_opening.webp",
+        "rawUrl": "/api/workspace/raw?path=game%2Fimages%2Fbg_opening.webp",
+        "source": "pollinations"
+      },
+      {
+        "key": "bg scene_two",
+        "slug": "bg_climax",
+        "title": "wide visual novel background interior climax scene, create a spooky haunted mansion mystery story game with thunder door sfx, dramatic volumetric lighting, detailed environment, no text (Concept Art · Background Generator)",
+        "prompt": "wide visual novel background interior climax scene, create a spooky haunted mansion mystery story game with thunder door sfx, dramatic volumetric lighting, detailed environment, no text",
+        "renpyPath": "images/bg_climax.webp",
+        "relativePath": "game/images/bg_climax.webp",
+        "targetPath": "/app/applet/workspace/game/images/bg_climax.webp",
+        "rawUrl": "/api/workspace/raw?path=game%2Fimages%2Fbg_climax.webp",
+        "source": "pollinations"
+      }
+    ],
+    "characters": [
+      {
+        "id": "selene",
+        "name": "Selene",
+        "role": "Occult investigator",
+        "color": "#f43f5e",
+        "voiceStyle": "female-whisper",
+        "prompt": "create a spooky haunted mansion mystery story game with thunder door sfx, gothic female investigator lantern character portrait, moody lighting, anime semi-realistic",
+        "renpyPath": "images/char_selene.png",
+        "relativePath": "game/images/char_selene.png",
+        "targetPath": "/app/applet/workspace/game/images/char_selene.png",
+        "rawUrl": "/api/workspace/raw?path=game%2Fimages%2Fchar_selene.png",
+        "title": "DR_Create A Horror Atmosphere_Dark Scene Generation",
+        "source": "civitai"
+      },
+      {
+        "id": "victor",
+        "name": "Victor",
+        "role": "Estate warden",
+        "color": "#94a3b8",
+        "voiceStyle": "male-narrator",
+        "prompt": "create a spooky haunted mansion mystery story game with thunder door sfx, mysterious aristocratic figure character portrait, moonlight gothic coat, detailed digital art",
+        "renpyPath": "images/char_victor.png",
+        "relativePath": "game/images/char_victor.png",
+        "targetPath": "/app/applet/workspace/game/images/char_victor.png",
+        "rawUrl": "/api/workspace/raw?path=game%2Fimages%2Fchar_victor.png",
+        "title": "DR_Create A Horror Atmosphere_Dark Scene Generation",
+        "source": "civitai"
+      }
+    ],
+    "items": [
+      {
+        "slug": "item_emblem",
+        "key": "item emblem",
+        "name": "Key Story Relic",
+        "prompt": "create a spooky haunted mansion mystery story game with thunder door sfx, glowing key story artifact emblem item illustration, high detail",
+        "renpyPath": "images/item_emblem.svg",
+        "relativePath": "game/images/item_emblem.svg",
+        "targetPath": "/app/applet/workspace/game/images/item_emblem.svg",
+        "rawUrl": "/api/workspace/raw?path=game%2Fimages%2Fitem_emblem.svg",
+        "title": "create a spooky haunted mansion mystery story game with thunder door sfx, glowing key story artifact emblem item illustration, high detail (Digital Painting · Game Asset Generator)",
+        "source": "vector-forge"
+      }
+    ],
+    "sfx": [
+      {
+        "key": "thunder_boom",
+        "label": "Thunder & Rain SFX",
+        "query": "thunderstorm lightning rumble sound effect",
+        "renpyPath": "audio/sfx_thunder_boom.mp3",
+        "relativePath": "game/audio/sfx_thunder_boom.mp3",
+        "targetPath": "/app/applet/workspace/game/audio/sfx_thunder_boom.mp3",
+        "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fsfx_thunder_boom.mp3",
+        "title": "Lightning.flac",
+        "source": "openverse (freesound)"
+      },
+      {
+        "key": "door_open",
+        "label": "Heavy Door Creak SFX",
+        "query": "wooden door creak open sound effect",
+        "renpyPath": "audio/sfx_door_open.mp3",
+        "relativePath": "game/audio/sfx_door_open.mp3",
+        "targetPath": "/app/applet/workspace/game/audio/sfx_door_open.mp3",
+        "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fsfx_door_open.mp3",
+        "title": "Gate door drawbridge wooden creaky opens closes hinge.wav",
+        "source": "freesound"
+      },
+      {
+        "key": "ui_chime",
+        "label": "Choice / Discovery Chime SFX",
+        "query": "discovery chime sound effect",
+        "renpyPath": "audio/sfx_ui_chime.wav",
+        "relativePath": "game/audio/sfx_ui_chime.wav",
+        "targetPath": "/app/applet/workspace/game/audio/sfx_ui_chime.wav",
+        "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fsfx_ui_chime.wav",
+        "title": "discovery chime sound effect",
+        "source": "monster-synth-cc0"
+      }
+    ],
+    "bgm": {
+      "key": "bgm_main",
+      "label": "horror Ambient Soundtrack",
+      "query": "horror create a spooky haunted mansion mystery story game with thunder door sfx instrumental ambient background music",
+      "renpyPath": "audio/bgm_main.wav",
+      "relativePath": "game/audio/bgm_main.wav",
+      "targetPath": "/app/applet/workspace/game/audio/bgm_main.wav",
+      "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fbgm_main.wav",
+      "title": "horror create a spooky haunted mansion mystery story game with thunder door sfx instrumental ambient background music",
+      "source": "monster-synth-cc0"
+    },
+    "voices": [
+      {
+        "renpyPath": "audio/voice_intro.mp3",
+        "relativePath": "game/audio/voice_intro.mp3",
+        "targetPath": "/app/applet/workspace/game/audio/voice_intro.mp3",
+        "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fvoice_intro.mp3",
+        "speaker": "selene",
+        "line": "Did you hear that? Nobody has stepped inside these halls for twenty years... until tonight.",
+        "source": "neural-tts"
+      },
+      {
+        "renpyPath": "audio/voice_reply.wav",
+        "relativePath": "game/audio/voice_reply.wav",
+        "targetPath": "/app/applet/workspace/game/audio/voice_reply.wav",
+        "rawUrl": "/api/workspace/raw?path=game%2Faudio%2Fvoice_reply.wav",
+        "speaker": "victor",
+        "line": "Keep the lantern raised and trust nothing in the shadows. Follow my lead.",
+        "source": "neural-tts"
+      }
+    ]
+  },
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "labelCount": 4
+  }
+}

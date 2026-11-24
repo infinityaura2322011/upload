@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#080312"/>
+      <stop offset="60%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="52%" cy="38%" r="44%">
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <circle cx="660" cy="270" r="290" fill="url(#aura)"/>
+  <circle cx="660" cy="240" r="88" fill="#d8b4fe" fill-opacity="0.22" stroke="#d8b4fe" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M0 540 L180 430 L320 485 L520 330 L640 245 L760 340 L940 460 L1110 385 L1280 510 L1280 720 L0 720 Z" fill="#080312" fill-opacity="0.92"/>
+  <path d="M585 370 L615 265 L640 210 L665 265 L695 370 Z" fill="#2e1065" stroke="#d8b4fe" stroke-opacity="0.5" stroke-width="2"/>
+  <path d="M0 610 L290 520 L540 580 L800 495 L1060 570 L1280 525 L1280 720 L0 720 Z" fill="#070312"/>
+  <text x="36" y="684" fill="#d8b4fe" font-family="monospace" font-size="18" opacity="0.65">wide visual novel background int · dark-fantasy</text>
+</svg>

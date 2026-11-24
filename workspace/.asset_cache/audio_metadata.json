@@ -1,0 +1,19 @@
+{
+  "c8faf9871c3ba52d3f9559ee0effb75fadfb5e1f890dae1edb7444009e5a3e60": {
+    "checksum": "c8faf9871c3ba52d3f9559ee0effb75fadfb5e1f890dae1edb7444009e5a3e60",
+    "savedAt": 1795448892497,
+    "metadata": {
+      "title": "Hello warrior! · Female Expressive (Clear)",
+      "category": "voice",
+      "license": "CC0 Free Voice Sample",
+      "licenseConfidence": "LICENSE_CONFIRMED",
+      "downloadUrl": "/api/audio/tts?text=Hello%20warrior!&style=female-expressive",
+      "sourceUrl": "https://perchance.org/ai-voice-generator",
+      "sourceProvider": "neural-voice-studio",
+      "relativePath": "Assets/Audio/Hello_warrior_Female_Expressive_Clear__wvv3.mp3",
+      "targetPath": "/app/applet/workspace/Assets/Audio/Hello_warrior_Female_Expressive_Clear__wvv3.mp3",
+      "fileSize": 11232,
+      "format": "MP3"
+    }
+  }
+}
